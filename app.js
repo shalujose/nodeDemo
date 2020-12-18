@@ -1,15 +1,12 @@
-const express=require("express");
-const dotenv=require("dotenv");
-const app=express();
+const dotenv = require("dotenv");
 dotenv.config();
-const port=3000;
+const express = require("express");
+const app = express();
 
+ const userRouter= require("./api/users/user.router");
+ app.use(express.json());
+ app.use("/api/users", userRouter);
 
-app.get("/api", (req,res) => {
-    res.json({
-        success: 1,
-        message: "Rest api is working"
-    });
+app.listen(process.env.App_PORT, () => {
+    console.log("server is listening on port ", process.env.App_PORT);
 });
-
-app.listen(port, () => console.log(`server is listening on port ${port}!`));
